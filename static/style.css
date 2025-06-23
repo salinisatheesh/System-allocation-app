@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f7f7f7;
+}
+h1 {
+    color: #2c3e50;
+}
+#reservation-form, #reservations-list {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    max-width: 400px;
+}
+#calendar {
+    margin-bottom: 30px;
+}
+input, button {
+    margin: 8px 0;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+button {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #217dbb;
+}
+#form-message {
+    margin-top: 10px;
+    color: #e74c3c;
+}
+.reservation-item {
+    margin-bottom: 8px;
+    background: #eaf6fb;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
