@@ -17,16 +17,17 @@ def save_reservations_to_file():
     with open(RESERVATION_FILE, 'w') as f:
         json.dump(reservations, f, indent=2)
 
-# Helper to send reservation file via email
-def send_reservation_email():
-    EMAIL_ADDRESS = 'your_email@example.com'  # TODO: Replace with your email
-    EMAIL_PASSWORD = 'your_password'          # TODO: Replace with your password
-    RECIPIENT_EMAIL = 'recipient@example.com' # TODO: Replace with recipient email
+# Helper to send reservation file via email to multiple recipients
+def send_reservation_email(recipients=None):
+    EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS', 'your_email@example.com')
+    EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'your_password')
+    if recipients is None:
+        recipients = os.environ.get('RECIPIENT_EMAILS', 'recipient@example.com').split(',')
     
     msg = EmailMessage()
     msg['Subject'] = 'Updated Reservations File'
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = RECIPIENT_EMAIL
+    msg['To'] = ', '.join(recipients)
     msg.set_content('Attached is the latest reservations file.')
 
     # Attach the file
@@ -36,7 +37,7 @@ def send_reservation_email():
     msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
 
     # Send the email
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:  # Change SMTP server if needed
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         smtp.send_message(msg)
 
